@@ -45,6 +45,22 @@ h1 {
     padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--lighter-grey);
+    box-sizing: border-box;
+}
+
+.employee-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+
+.employee-info > * {
+    margin: 0;
+}
+
+.modal {
+    display: none;
 }
 
 @media (min-width: 768px) {
