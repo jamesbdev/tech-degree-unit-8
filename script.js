@@ -7,8 +7,6 @@ async function logEmployees() {
     const employeesData = await response.json();
     //store results in a variable
     const results = employeesData.results;
- 
-
     //loop through employee data
     results.forEach((employee, index) => {
         const mainContainer = document.querySelector('.group-container');
@@ -88,9 +86,19 @@ const openModal = (e) => {
   const modal = document.querySelectorAll('.modal')[index];
   //display modal
   modal.style.display = 'block';
+  //add the open class
+  modal.classList.add('modal-open');
   //show overlay
   overlay.classList.remove('hidden');
 
+
+  //get the close icon from the currently opened modal
+const closeIcon = document.querySelector('.modal-open .modal-close');
+
+if (closeIcon !== null) {
+  //on click close the current modal
+  closeIcon.addEventListener('click', closeModal);
+}
 }
 
 //add event listener to the container
@@ -98,17 +106,28 @@ container.addEventListener('click', openModal);
 
 //close the modal when clicking on close icon
 const closeModal = () => {
-  const closeIcon = document.querySelector('.show .modal-close');
-    closeIcon.addEventListener('click', (event) => {
-        const currentModal = document.querySelector('.show');
-        currentModal.style.display = 'none';
-        currentModal.classList.remove('show');
-        
-    });
-}
+   //get the currently opened modal
+  const overlay = document.querySelector('.overlay');
+  //remove the overlay
+  overlay.classList.add('hidden');
+  const openModal = document.querySelector('.modal-open');
+  //hide the modal
+  openModal.style.display = 'none';
+  //remove the open class
+  openModal.classList.remove('modal-open');
 
-//closeModal();
+};
 
-const modal = document.querySelectorAll('.modal');
+
+
+
+
+
+
+
+
+
+
+
 
 
