@@ -57,7 +57,7 @@ async function logEmployees() {
             <hr>
             <p>${employeePhone}</p>
             <p>${employeeAddress}</p>
-            <p>Birthday: ${employee.dob.date}</p>
+            <p>Birthday: ${employee.dob.date.substr(0, 10)}</p>
             </div>
             </div>`;
             //append to DOM
