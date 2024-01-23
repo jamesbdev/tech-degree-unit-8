@@ -70,6 +70,7 @@ h1 {
 .employee-card:hover {
     cursor: pointer;
     background-color: #e0e5f7;
+    border: 1px solid #7992ea;
 }
 
 .employee-info {
