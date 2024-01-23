@@ -118,6 +118,28 @@ const closeModal = () => {
 
 };
 
+const input = document.querySelector('#search');
+
+const searchEmployee = () => {
+
+  const searchValue = input.value.toLowerCase();
+  const employeeNames = document.querySelectorAll('.employee-name');
+  
+    employeeNames.forEach((name) => {
+        const employeeCard = name.closest('.employee-card');
+        const employeeCardName = name.textContent.toLowerCase();
+        if (employeeCardName.includes(searchValue)) {
+        employeeCard.style.display = 'flex';
+        } else {
+        employeeCard.style.display = 'none';
+        }
+    });
+}
+
+input.addEventListener('keyup', searchEmployee);
+
+
+
 
 
 
