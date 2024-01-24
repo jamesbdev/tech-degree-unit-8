@@ -98,61 +98,7 @@ const openModal = (e) => {
   //get the close icon from the currently opened modal
 const closeIcon = document.querySelector('.modal-open .modal-close');
 
-// Add event listener to the close icon
-addCloseEventListener(modal);
-
-
-//show next modal when clicking on "next" button
-
-const nextEmployee = (event) => {
-    //get the data-id attribute of the currently opened modal 
-    let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
-    let nextModalIndex = parseInt(modalIndex, 10) + 1;
-    const nextModal = document.querySelectorAll('.modal')[nextModalIndex];
-
-    //hide the current modal
-    const currentModal = document.querySelector('.modal-open');
-    currentModal.style.display = 'none';
-    currentModal.classList.remove('modal-open');
-    //display the next modal
-    nextModal.style.display = 'block';
-    nextModal.classList.add('modal-open');
-  
-
-      // Add event listener to the close icon of the next modal
-    addCloseEventListener(nextModal);
-}
-
-const previousEmployee = (event) => {
-    //get the data-id attribute of the currently opened modal 
-    let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
-    let previousModalIndex = parseInt(modalIndex, 10) - 1;
-    const previousModal = document.querySelectorAll('.modal')[previousModalIndex];
-    console.log(previousModal);
-    //hide the current modal
-    const currentModal = document.querySelector('.modal-open');
-    currentModal.style.display = 'none';
-    currentModal.classList.remove('modal-open');
-    //display the next modal
-    previousModal.style.display = 'block';
-    previousModal.classList.add('modal-open');
-    previousModalIndex --;
-}
-
-const prevBtn = document.querySelector('.modal-open .modal-prev');
-const nextBtn = document.querySelector('.modal-open .modal-next');
-
-if (nextBtn !== null) { 
-   nextBtn.addEventListener('click', nextEmployee);
-}
-
-if (prevBtn !== null) {
-    prevBtn.addEventListener('click', previousEmployee);
-}
-
-}
-
-// Function to add event listener to the close icon of a given modal
+// Function to add event listener to the close icon of the new modal
 const addCloseEventListener = (modal) => {
     const closeIcon = modal.querySelector('.modal-close');
   
@@ -164,7 +110,106 @@ const addCloseEventListener = (modal) => {
     }
 };
 
+// Add event listener to the close icon
+addCloseEventListener(modal);
 
+
+    //show next modal when clicking on "next" button
+    const nextEmployee = (event) => {
+        //get the data-id attribute of the currently opened modal
+        //get all modals 
+        const modals = document.querySelectorAll('.modal');
+        //get the index of the current modal
+        let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
+        //get the index of the next modal
+        let nextModalIndex = parseInt(modalIndex, 10) + 1;
+        // Check if nextModalIndex is within range
+        if (nextModalIndex >= modals.length) {
+        nextModalIndex = 0; // Loop back to the first modal
+        }
+        
+        const nextModal = modals[nextModalIndex];
+
+        //get the current modal
+        const currentModal = document.querySelector('.modal-open');
+        //hide the current modal
+        currentModal.style.display = 'none';
+        //remove the open class
+        currentModal.classList.remove('modal-open');
+        //display the next modal
+        nextModal.style.display = 'block';
+        //add the open class
+        nextModal.classList.add('modal-open');
+        
+        // Add event listener to the close icon of the next modal
+        addCloseEventListener(nextModal);
+        
+        //add event listener to next button
+        addNextEventListener(nextModal);
+    }
+
+    //displays the previous employee modal 
+    const previousEmployee = (event) => {
+        //get the data-id attribute of the currently opened modal 
+        let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
+        let prevModalIndex = parseInt(modalIndex, 10) - 1;
+        // Check if nextModalIndex is within range
+        if (prevModalIndex <= 0) {
+            prevModalIndex = 11; // Loop back to the first modal
+        }
+          //get the modal with the previous index
+        const previousModal = document.querySelectorAll('.modal')[prevModalIndex];
+        //hide the current modal
+        const currentModal = document.querySelector('.modal-open');
+        currentModal.style.display = 'none';
+        currentModal.classList.remove('modal-open');
+        //display the next modal
+        previousModal.style.display = 'block';
+        previousModal.classList.add('modal-open');
+
+        //add event listener to close the modal
+        addCloseEventListener(previousModal);
+
+        //add event listener to previous button
+        addPrevEventListener(previousModal);
+        
+    }
+    //get the previous button
+    const prevBtn = document.querySelector('.modal-open .modal-prev');
+    //get the next button
+    const nextBtn = document.querySelector('.modal-open .modal-next');
+    //add an event listener to the next button
+    if (nextBtn !== null) { 
+    nextBtn.addEventListener('click', nextEmployee);
+    }
+    //add an event listener to the previous button 
+    if (prevBtn !== null) {
+        prevBtn.addEventListener('click', previousEmployee);
+    }
+
+
+//function to add event listener to the next button
+const addNextEventListener = (modal) => {
+    const nextBtn = modal.querySelector('.modal-next');
+    if (nextBtn !== null) {
+      nextBtn.removeEventListener('click', nextEmployee);
+      nextBtn.addEventListener('click', nextEmployee);
+    }
+};
+
+//function to add event listener to the previous button
+const addPrevEventListener = (modal) => {
+    const prevBtn = modal.querySelector('.modal-prev');
+    if (prevBtn !== null) {
+      prevBtn.removeEventListener('click', previousEmployee);
+      prevBtn.addEventListener('click', previousEmployee);
+   }
+}
+
+
+
+}
+//end of openModal function
 
 //add event listener to the container
 container.addEventListener('click', openModal);
