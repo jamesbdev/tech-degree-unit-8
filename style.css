@@ -172,6 +172,17 @@ main input:focus {
     margin: 0;
 }
 
+.modal-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal-nav a {
+    text-decoration: none;
+    color: var(--dark-grey);
+}
+
 
 @media (min-width: 768px) {
     body {

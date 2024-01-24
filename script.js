@@ -1,6 +1,5 @@
 
 //make fetch request
-
 async function logEmployees() {
     //make fetch request
     const response = await fetch("https://randomuser.me/api/?results=12&nat=us");
@@ -59,6 +58,10 @@ async function logEmployees() {
             <p>${employeeAddress}</p>
             <p>Birthday: ${employee.dob.date.substr(0, 10)}</p>
             </div>
+            <div class="modal-nav">
+                <a href="#" class="modal-prev">Prev</a>
+                <a href="#" class="modal-next">Next</a>
+            </div>
             </div>`;
             //append to DOM
             body.appendChild(modal);
@@ -95,11 +98,73 @@ const openModal = (e) => {
   //get the close icon from the currently opened modal
 const closeIcon = document.querySelector('.modal-open .modal-close');
 
-if (closeIcon !== null) {
-  //on click close the current modal
-  closeIcon.addEventListener('click', closeModal);
+// Add event listener to the close icon
+addCloseEventListener(modal);
+
+
+//show next modal when clicking on "next" button
+
+const nextEmployee = (event) => {
+    //get the data-id attribute of the currently opened modal 
+    let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
+    let nextModalIndex = parseInt(modalIndex, 10) + 1;
+    const nextModal = document.querySelectorAll('.modal')[nextModalIndex];
+
+    //hide the current modal
+    const currentModal = document.querySelector('.modal-open');
+    currentModal.style.display = 'none';
+    currentModal.classList.remove('modal-open');
+    //display the next modal
+    nextModal.style.display = 'block';
+    nextModal.classList.add('modal-open');
+  
+
+      // Add event listener to the close icon of the next modal
+    addCloseEventListener(nextModal);
 }
+
+const previousEmployee = (event) => {
+    //get the data-id attribute of the currently opened modal 
+    let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
+    let previousModalIndex = parseInt(modalIndex, 10) - 1;
+    const previousModal = document.querySelectorAll('.modal')[previousModalIndex];
+    console.log(previousModal);
+    //hide the current modal
+    const currentModal = document.querySelector('.modal-open');
+    currentModal.style.display = 'none';
+    currentModal.classList.remove('modal-open');
+    //display the next modal
+    previousModal.style.display = 'block';
+    previousModal.classList.add('modal-open');
+    previousModalIndex --;
 }
+
+const prevBtn = document.querySelector('.modal-open .modal-prev');
+const nextBtn = document.querySelector('.modal-open .modal-next');
+
+if (nextBtn !== null) { 
+   nextBtn.addEventListener('click', nextEmployee);
+}
+
+if (prevBtn !== null) {
+    prevBtn.addEventListener('click', previousEmployee);
+}
+
+}
+
+// Function to add event listener to the close icon of a given modal
+const addCloseEventListener = (modal) => {
+    const closeIcon = modal.querySelector('.modal-close');
+  
+    if (closeIcon !== null) {
+      // Remove any existing event listeners
+      closeIcon.removeEventListener('click', closeModal);
+      // Add new event listener
+      closeIcon.addEventListener('click', closeModal);
+    }
+};
+
+
 
 //add event listener to the container
 container.addEventListener('click', openModal);
@@ -118,10 +183,10 @@ const closeModal = () => {
 
 };
 
+//get the search input
 const input = document.querySelector('#search');
-
+//displays employees with the name searched for
 const searchEmployee = () => {
-
   const searchValue = input.value.toLowerCase();
   const employeeNames = document.querySelectorAll('.employee-name');
   
@@ -135,8 +200,11 @@ const searchEmployee = () => {
         }
     });
 }
-
+//add event listener to the input
 input.addEventListener('keyup', searchEmployee);
+
+
+
 
 
 
