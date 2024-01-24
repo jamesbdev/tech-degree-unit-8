@@ -141,22 +141,24 @@ addCloseEventListener(modal);
         //add the open class
         nextModal.classList.add('modal-open');
         
-        // Add event listener to the close icon of the next modal
-        addCloseEventListener(nextModal);
-        
-        //add event listener to next button
-        addNextEventListener(nextModal);
+        addListeners(nextModal);
     }
 
     //displays the previous employee modal 
     const previousEmployee = (event) => {
         //get the data-id attribute of the currently opened modal 
         let modalIndex = document.querySelector('.modal-open').getAttribute('data-index');
+        //get index of the previous modal
         let prevModalIndex = parseInt(modalIndex, 10) - 1;
+      
         // Check if nextModalIndex is within range
         if (prevModalIndex <= 0) {
             prevModalIndex = 11; // Loop back to the first modal
         }
+        //get the next modal index
+        let nextModalIndex = parseInt(modalIndex, 10) + 1;
+        //get the next modal
+        const nextModal = document.querySelectorAll('.modal')[nextModalIndex];
           //get the modal with the previous index
         const previousModal = document.querySelectorAll('.modal')[prevModalIndex];
         //hide the current modal
@@ -167,12 +169,18 @@ addCloseEventListener(modal);
         previousModal.style.display = 'block';
         previousModal.classList.add('modal-open');
 
-        //add event listener to close the modal
-        addCloseEventListener(previousModal);
-
-        //add event listener to previous button
-        addPrevEventListener(previousModal);
+        //add event listeners
+        addListeners(previousModal);
         
+    }
+
+    const addListeners = (modal) => {
+       //add event listener to close the modal
+       addCloseEventListener(modal);
+       //add event listener to previous button
+       addPrevEventListener(modal);
+       //add event listener to next button
+       addNextEventListener(modal);
     }
     //get the previous button
     const prevBtn = document.querySelector('.modal-open .modal-prev');
@@ -188,26 +196,27 @@ addCloseEventListener(modal);
     }
 
 
-//function to add event listener to the next button
-const addNextEventListener = (modal) => {
-    const nextBtn = modal.querySelector('.modal-next');
-    if (nextBtn !== null) {
-      nextBtn.removeEventListener('click', nextEmployee);
-      nextBtn.addEventListener('click', nextEmployee);
+    //function to add event listener to the next button
+    const addNextEventListener = (modal) => {
+        if (modal !== null && modal !== undefined) {
+        const nextBtn = modal.querySelector('.modal-next');
+        if (nextBtn !== null) {
+            nextBtn.removeEventListener('click', nextEmployee);
+            nextBtn.addEventListener('click', nextEmployee);
+        }
+        } else {
+            console.log(modal);
+        }
+    };
+
+    //function to add event listener to the previous button
+    const addPrevEventListener = (modal) => {
+        const prevBtn = modal.querySelector('.modal-prev');
+        if (prevBtn !== null) {
+          prevBtn.removeEventListener('click', previousEmployee);
+          prevBtn.addEventListener('click', previousEmployee);
+        }
     }
-};
-
-//function to add event listener to the previous button
-const addPrevEventListener = (modal) => {
-    const prevBtn = modal.querySelector('.modal-prev');
-    if (prevBtn !== null) {
-      prevBtn.removeEventListener('click', previousEmployee);
-      prevBtn.addEventListener('click', previousEmployee);
-   }
-}
-
-
-
 }
 //end of openModal function
 
