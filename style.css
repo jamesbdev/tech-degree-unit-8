@@ -4,6 +4,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     padding: 1rem;
     position: relative;
+    margin: 0;
 }
 
 :root {
@@ -37,8 +38,9 @@ main input {
     margin-bottom: 1.5rem;
     height: 2rem;
     border-radius: 5px;
+    width: 100%;
     padding: 1rem 0.5rem;
-    outline: none;
+    outline: unset;
     box-sizing: border-box;
     color: var(--dark-grey);
 }
@@ -56,6 +58,8 @@ main input:focus {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     row-gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .employee-name {
@@ -68,7 +72,7 @@ main input:focus {
     height: 80%;
 }
 
-.employee-email, .city {
+.employee-email, .employee-city {
     color: var(--lighter-grey);
     font-size: 1rem;
 }
@@ -77,10 +81,12 @@ main input:focus {
     display: flex;
     gap: 1rem;
     align-items: center;
+    justify-content: flex-start;
     padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--lighter-grey);
     box-sizing: border-box;
+    width: 100%;
 }
 
 .employee-card:hover {
@@ -105,9 +111,9 @@ main input:focus {
     display: none;
     position: fixed;
     z-index: 10;
-    left: 3rem;
+    left: 9%;
     top: 3rem;
-    width: 60%;
+    width: 80%;
     height: auto;
     background-color: white;
     padding: 1.5rem;
@@ -196,6 +202,10 @@ main input:focus {
     .modal {
         width: 40%;
         left: 30%;
+    }
+
+    main input {
+        width: auto;
     }
 }
 

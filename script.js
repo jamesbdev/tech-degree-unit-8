@@ -40,7 +40,7 @@ async function logEmployees() {
         //create modal
         const createModal = (image, name, index) => {
             const modal = document.createElement('div');
-            const body = document.querySelector('body');
+            const main = document.querySelector('main');
             modal.classList.add('modal');
             modal.setAttribute('data-index', index);
             modal.innerHTML = `
@@ -64,7 +64,7 @@ async function logEmployees() {
             </div>
             </div>`;
             //append to DOM
-            body.appendChild(modal);
+            main.appendChild(modal);
 
         }
         //instantiate modal
@@ -199,15 +199,16 @@ addCloseEventListener(modal);
     //function to add event listener to the next button
     const addNextEventListener = (modal) => {
         if (modal !== null && modal !== undefined) {
-        const nextBtn = modal.querySelector('.modal-next');
-        if (nextBtn !== null) {
-            nextBtn.removeEventListener('click', nextEmployee);
-            nextBtn.addEventListener('click', nextEmployee);
-        }
-        } else {
+            const nextBtn = modal.querySelector('.modal-next');
+            if (nextBtn !== null) {
+                nextBtn.removeEventListener('click', nextEmployee);
+                nextBtn.addEventListener('click', nextEmployee);
+            } 
+        } else { 
             console.log(modal);
         }
     };
+
 
     //function to add event listener to the previous button
     const addPrevEventListener = (modal) => {
