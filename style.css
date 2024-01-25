@@ -5,6 +5,8 @@ body {
     padding: 1rem;
     position: relative;
     margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 :root {
@@ -51,8 +53,6 @@ main input:focus {
     box-shadow: 5px 5px 15px #e0e5f7;
 }
 
-
-
 .group-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -69,13 +69,14 @@ main input:focus {
 
 .employee-image, .modal-image {
     border-radius: 50%;
-    height: 80%;
+    height: 78%;
 }
 
 .employee-email, .employee-city {
     color: var(--lighter-grey);
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
+
 
 .employee-card {
     display: flex;
@@ -86,7 +87,6 @@ main input:focus {
     border-radius: 5px;
     border: 1px solid var(--lighter-grey);
     box-sizing: border-box;
-    width: 100%;
 }
 
 .employee-card:hover {
@@ -100,8 +100,13 @@ main input:focus {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-
+    box-sizing: border-box;
 }
+
+.employee-email {
+    word-break: break-all;
+}
+
 
 .employee-info > * {
     margin: 0;
