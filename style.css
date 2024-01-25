@@ -43,6 +43,7 @@ main input {
     width: 100%;
     padding: 1rem 0.5rem;
     outline: unset;
+    border: 2px solid var(--lighter-grey);
     box-sizing: border-box;
     color: var(--dark-grey);
 }
